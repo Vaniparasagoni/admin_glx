@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen>
         if(email != "" && password != "")
         {
           //login
-          //loginAdmin();
+          loginAdmin();
         }
       },
       child: Text(
@@ -89,53 +89,53 @@ class _LoginScreenState extends State<LoginScreen>
     );
   }
 
-  // loginAdmin() async
-  // {
-  //   showDialog(
-  //       context: context,
-  //       builder: (context)
-  //       {
-  //         return LoadingAlertDialog(
-  //           message: "please wait...",
-  //         );
-  //       }
-  //   );
-  //
-  //   User currentUser;
-  //   await FirebaseAuth.instance.signInWithEmailAndPassword(
-  //     email: email,
-  //     password: password,
-  //   ).then((aAuth)
-  //   {
-  //     currentUser = aAuth.user;
-  //   }).catchError((error)
-  //   {
-  //     Navigator.pop(context);
-  //
-  //     showDialog(
-  //         context: context,
-  //         builder: (context)
-  //         {
-  //           return ErrorAlertDialog(
-  //             message: "Error Occured: " + error.toString(),
-  //           );
-  //         }
-  //     );
-  //   });
-  //
-  //   if(currentUser != null)
-  //   {
-  //     //homepage
-  //     Route newRoute = MaterialPageRoute(builder: (context) => HomeScreen());
-  //     Navigator.pushReplacement(context, newRoute);
-  //   }
-  //   else
-  //   {
-  //     //loginPage
-  //     Route newRoute = MaterialPageRoute(builder: (context) => LoginScreen());
-  //     Navigator.pushReplacement(context, newRoute);
-  //   }
-  // }
+  loginAdmin() async
+  {
+    showDialog(
+        context: context,
+        builder: (context)
+        {
+          return LoadingAlertDialog(
+            message: "please wait...",
+          );
+        }
+    );
+  
+    User currentUser;
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    ).then((aAuth)
+    {
+      currentUser = aAuth.user;
+    }).catchError((error)
+    {
+      Navigator.pop(context);
+  
+      showDialog(
+          context: context,
+          builder: (context)
+          {
+            return ErrorAlertDialog(
+              message: "Error Occured: " + error.toString(),
+            );
+          }
+      );
+    });
+  
+    if(currentUser != null)
+    {
+      //homepage
+      Route newRoute = MaterialPageRoute(builder: (context) => HomeScreen());
+      Navigator.pushReplacement(context, newRoute);
+    }
+    else
+    {
+      //loginPage
+      Route newRoute = MaterialPageRoute(builder: (context) => LoginScreen());
+      Navigator.pushReplacement(context, newRoute);
+    }
+  }
 
 
   @override
