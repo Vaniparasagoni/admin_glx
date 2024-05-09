@@ -11,9 +11,9 @@ class ActivateAccountsScreen extends StatefulWidget {
 
 class _ActivateAccountsScreenState extends State<ActivateAccountsScreen>
 {
-  QuerySnapshot users;
+  late QuerySnapshot users;
 
-  Future<bool> showDialogForActivatingAccount(selectedDoc) async
+  Future<Future> showDialogForActivatingAccount(selectedDoc) async
   {
     return showDialog(
         context: context,

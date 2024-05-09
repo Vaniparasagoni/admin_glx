@@ -11,9 +11,9 @@ class BlockedAccountsScreen extends StatefulWidget {
 
 class _BlockedAccountsScreenState extends State<BlockedAccountsScreen>
 {
-  QuerySnapshot users;
+  late QuerySnapshot users;
 
-  Future<bool> showDialogForBlockingAccount(selectedDoc) async
+  Future<Future> showDialogForBlockingAccount(selectedDoc) async
   {
     return showDialog(
         context: context,

@@ -16,68 +16,68 @@ class ApproveAdsScreen extends StatefulWidget {
 class _ApproveAdsScreenState extends State<ApproveAdsScreen>
 {
   FirebaseAuth auth = FirebaseAuth.instance;
-  String userName;
-  String userNumber;
-  String itemPrice;
-  String itemModel;
-  String itemColor;
-  String description;
-  String urlImage;
-  String itemLocation;
+  late String userName;
+  late String userNumber;
+  late String itemPrice;
+  late String itemModel;
+  late String itemColor;
+  late String description;
+  late String urlImage;
+  late String itemLocation;
 
 
-  Future<bool> showDialogForApprovingAd(selectedDoc) async
+  Future<Future> showDialogForApprovingAd(selectedDoc) async
   {
     return showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context)
-      {
-        return AlertDialog(
-          title: Text(
-            "Item Approval",
-            style: TextStyle(fontSize: 24, letterSpacing: 2.0, fontWeight: FontWeight.bold),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text("Do you want to approve this item ?"),
-            ],
-          ),
-          actions: [
-            ElevatedButton(
-              child: Text(
-                "Cancel",
-              ),
-              onPressed: ()
-              {
-                Navigator.pop(context);
-              },
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context)
+        {
+          return AlertDialog(
+            title: Text(
+              "Item Approval",
+              style: TextStyle(fontSize: 24, letterSpacing: 2.0, fontWeight: FontWeight.bold),
             ),
-            ElevatedButton(
-              child: Text(
-                "Approve Now",
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("Do you want to approve this item ?"),
+              ],
+            ),
+            actions: [
+              ElevatedButton(
+                child: Text(
+                  "Cancel",
+                ),
+                onPressed: ()
+                {
+                  Navigator.pop(context);
+                },
               ),
-              onPressed: ()
-              {
-                Map<String, dynamic> adsData =
+              ElevatedButton(
+                child: Text(
+                  "Approve Now",
+                ),
+                onPressed: ()
                 {
-                  "status": "approved",
-                };
-                FirebaseFirestore.instance.collection("items")
-                    .doc(selectedDoc)
-                    .update(adsData).then((value)
-                {
-                  print("Ad Approved successfully.");
+                  Map<String, dynamic> adsData =
+                  {
+                    "status": "approved",
+                  };
+                  FirebaseFirestore.instance.collection("items")
+                      .doc(selectedDoc)
+                      .update(adsData).then((value)
+                  {
+                    print("Ad Approved successfully.");
 
-                  Route newRoute = MaterialPageRoute(builder: (_) => HomeScreen());
-                  Navigator.pushReplacement(context, newRoute);
-                });
-              },
-            ),
-          ],
-        );
-      }
+                    Route newRoute = MaterialPageRoute(builder: (_) => HomeScreen());
+                    Navigator.pushReplacement(context, newRoute);
+                  });
+                },
+              ),
+            ],
+          );
+        }
     );
   }
 

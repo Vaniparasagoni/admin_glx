@@ -1,6 +1,6 @@
 import 'package:admin_olx/MainScreens/home.dart';
 import 'package:flutter/material.dart';
-import 'package:image_slider/image_slider.dart';
+//import 'package:image_slider/image_slider.dart';
 
 
 
@@ -10,17 +10,17 @@ class AdsDescriptionScreen extends StatefulWidget
   final String itemColor, userNumber, description, address;
 
   AdsDescriptionScreen({
-    this.title,
-    this.itemColor,
-    this.urlImage1,
-    this.urlImage2,
-    this.urlImage3,
-    this.urlImage4,
-    this.urlImage5,
-    this.userNumber,
-    this.description,
-    this.address,
-});
+    required this.title,
+    required this.itemColor,
+    required this.urlImage1,
+    required this.urlImage2,
+    required this.urlImage3,
+    required this.urlImage4,
+    required this.urlImage5,
+    required this.userNumber,
+    required this.description,
+    required this.address,
+  });
 
 
   @override
@@ -30,7 +30,7 @@ class AdsDescriptionScreen extends StatefulWidget
 
 class _AdsDescriptionScreenState extends State<AdsDescriptionScreen> with SingleTickerProviderStateMixin
 {
-  TabController tabController;
+  late TabController tabController;
   static List<String> links = [];
 
   @override
@@ -138,11 +138,11 @@ class _AdsDescriptionScreenState extends State<AdsDescriptionScreen> with Single
                   children: [
                     //index 0
                     tabController.index == 0
-                    ? Container(
+                        ? Container(
                       width: 0,
                       height: 0,
                     )
-                    : ElevatedButton(
+                        : ElevatedButton(
                       child: Text("Previous", style: TextStyle(color: Colors.white),),
                       onPressed: ()
                       {
@@ -152,7 +152,7 @@ class _AdsDescriptionScreenState extends State<AdsDescriptionScreen> with Single
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurple,
+                        backgroundColor: Colors.deepPurple,
                       ),
                     ),
 
@@ -170,7 +170,7 @@ class _AdsDescriptionScreenState extends State<AdsDescriptionScreen> with Single
                       },
                       child: Text("Next", style: TextStyle(color: Colors.white),),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurple,
+                        backgroundColor: Colors.deepPurple,
                       ),
                     ),
 
@@ -231,4 +231,6 @@ class _AdsDescriptionScreenState extends State<AdsDescriptionScreen> with Single
       ),
     );
   }
+
+  ImageSlider({required bool showTabIndicator, required MaterialColor tabIndicatorColor, required Color tabIndicatorSelectedColor, required int tabIndicatorHeight, required int tabIndicatorSize, required TabController tabController, required Cubic curve, required double width, required double height, required bool autoSlide, required Duration duration, required bool allowManualSlide, required List<ClipRRect> children}) {}
 }

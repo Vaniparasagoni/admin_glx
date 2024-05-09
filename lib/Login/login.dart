@@ -1,10 +1,15 @@
 // import 'package:admin_olx/DialogBox/errorDialog.dart';
 // import 'package:admin_olx/DialogBox/loadingDialog.dart';
 import 'package:admin_olx/Login/backgroundPainter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:admin_olx/MainScreens/home.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../DialogBox/errorDialog.dart';
+import '../DialogBox/loadingDialog.dart';
+import '../MainScreens/home.dart';
 
 
 
@@ -96,12 +101,13 @@ class _LoginScreenState extends State<LoginScreen>
         builder: (context)
         {
           return LoadingAlertDialog(
-            message: "please wait...",
+            message: "Please wait...",
+            key: UniqueKey(),
           );
         }
     );
-  
-    User currentUser;
+
+    User? currentUser;
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email,
       password: password,
@@ -111,18 +117,19 @@ class _LoginScreenState extends State<LoginScreen>
     }).catchError((error)
     {
       Navigator.pop(context);
-  
+
       showDialog(
           context: context,
           builder: (context)
           {
             return ErrorAlertDialog(
-              message: "Error Occured: " + error.toString(),
+              message: "Error Occurred: " + error.toString(),
+              key: UniqueKey(),
             );
           }
       );
     });
-  
+
     if(currentUser != null)
     {
       //homepage
@@ -148,10 +155,10 @@ class _LoginScreenState extends State<LoginScreen>
       backgroundColor: Colors.black87,
       body: Stack(
         alignment: Alignment.lerp(
-          Alignment.lerp(Alignment.centerRight, Alignment.center, 0.3),
+          Alignment.lerp(Alignment.centerRight, Alignment.center, 0.3)!,
           Alignment.topCenter,
           0.15,
-        ),
+        )!,
         children: [
           CustomPaint(
             painter: BackgroundPainter(),
